@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+:root{
+    --todo-pending-bg: rgb(124, 134, 134) !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+    padding: 1rem 1rem;
+    background-color: rgb(119, 119, 119);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+    background-color: rgb(85, 84, 84);
+    color: rgb(255, 255, 255);
+    border-style: ridge;
+    border-width: 3px;
+    border-color: rgb(128, 124, 124);
+    margin: 1rem 1rem;
+    padding: .2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.appTitle {
+    border-style: groove;
+    border-width: .15cm;
+    border-color: rgb(160, 175, 170);
 }
 
-.App-link {
-  color: #61dafb;
+.todo-pending {
+    background-color: var(--todo-pending-bg);
+    border-color: rgb(111, 134, 134);
+    border-style: ridge;
+    border-width: .14cm;
+    border-color: rgb(153, 204, 204);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.todo-pending span{
+    background-color: var(--todo-pending-bg);
+}
+
+.todo-pending span span{
+    background-color:var(--todo-pending-bg);
+    font-weight: 900;
+    font-size: 40px;
+    margin: 0 -1rem !important;
+}
+
+.addTodoItemInput{
+    margin: 2% 0%;
+    justify-content: center;
+    align-items: center;
+    height: 6rem !important;
+    padding: 1rem 1rem !important;
+    font-size: 40px !important;
+}
+
+::placeholder{
+    font-weight: 800 !important;
+    font-size: 40px;
+    color: rgb(150, 150, 150)!important;
 }
