@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import TodoList from './TodoList';
 
-const baseUrl = 'http://localhost:8080/api/todolist';
+const baseUrl = 'https://todo-uyt1.onrender.com/api/todolist';
 function App() {
   const [todos, setTodos] = useState([])
   const todoNameRef = useRef()
@@ -74,6 +74,7 @@ function App() {
       <div className="todo-pending" align="right"> <span> <span>{todos.filter(todo => !todo.completed).length} </span> Todo items left </span> </div>
       <div className="addTodoItem">
         <input ref={todoNameRef} className="form-control addTodoItemInput" id="floatingInput" placeholder="Add Todo Item" onKeyDown={handleKeyDown}/>
+        <button onClick={handleAddTodo}>⏎</button>
       </div>
       <TodoList todos={todos} updateTodo={updateTodo} />
       <button className="btn btn-danger" onClick={handleClearCompleted}> Clear Completed </button>

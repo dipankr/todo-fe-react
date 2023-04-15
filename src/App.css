@@ -1,5 +1,6 @@
 :root{
     --todo-pending-bg: rgb(124, 134, 134) !important;
+    --todo-pending-border-color: rgb(111, 134, 134);
 }
 
 *{
@@ -25,7 +26,7 @@ body{
 
 .todo-pending {
     background-color: var(--todo-pending-bg);
-    border-color: rgb(111, 134, 134);
+    border-color: var(--todo-pending-border-color);
     border-style: ridge;
     border-width: .14cm;
     border-color: rgb(153, 204, 204);
@@ -42,11 +43,43 @@ body{
     margin: 0 -1rem !important;
 }
 
+.addTodoItem {
+    display:flex;
+    flex-direction:row;
+
+    /* This bit draws the box around it */
+    border:1px solid grey;
+
+    /* I've used padding so you can see the edges of the elements. */
+    padding:1px;
+}
+input {
+    /* Tell the input to use all the available space */
+    flex-grow:2;
+    /* And hide the input's outline, so the form looks like the outline */
+    border:none;
+}
+/* remove the input focus blue box, it will be in the wrong place. */
+input:focus {
+    outline: none;
+}
+
+/* Add the focus effect to the form so it contains the button */
+form:focus-within {
+    outline: 1px solid blue
+}
+
+button {
+    /* Just a little styling to make it pretty */
+    border:1px var(--todo-pending-border-color);
+    background:var(--todo-pending-bg);
+    color:white;
+}
+
 .addTodoItemInput{
-    margin: 2% 0%;
     justify-content: center;
     align-items: center;
-    height: 6rem !important;
+    height: 8rem !important;
     padding: 1rem 1rem !important;
     font-size: 40px !important;
 }
