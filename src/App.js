@@ -2,8 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import TodoList from './component/TodoList';
 import Form from './component/Form';
 
-// const baseUrl = 'https://todo-uyt1.onrender.com/api/todolist';
-const baseUrl = 'http://localhost:8080/api/todolist';
+const baseUrl = 'https://todo-uyt1.onrender.com/api/todolist';
 
 function App() {
   //state objects
