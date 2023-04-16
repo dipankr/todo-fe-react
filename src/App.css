@@ -13,8 +13,13 @@ body{
     border-style: ridge;
     border-width: 3px;
     border-color: rgb(128, 124, 124);
-    margin: 2rem 2rem;
     padding: .1rem;
+}
+
+@media (min-width: 768px) {
+    body{
+        margin: 2rem 2rem;
+    }
 }
 
 .appTitle {
