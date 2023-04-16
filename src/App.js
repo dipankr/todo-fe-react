@@ -1,51 +1,99 @@
-import React, { useState, useRef, useEffect } from 'react';
-import TodoList from './TodoList';
+import React, {useEffect, useRef, useState} from 'react';
+import TodoList from './component/TodoList';
+import Form from './component/Form';
 
-const baseUrl = 'https://todo-uyt1.onrender.com/api/todolist';
+// const baseUrl = 'https://todo-uyt1.onrender.com/api/todolist';
+const baseUrl = 'http://localhost:8080/api/todolist';
+
 function App() {
+  //state objects
+  const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState([])
+  const [status, setStatus] = useState('all');
+  const [filteredTodos, setFilteredTodos] = useState([]);
+
+  //ref objects: for referencing
   const todoNameRef = useRef()
 
-  // get local stored todos
+  // useEffect: used to trigger effect on state change
+
+  //run once
   useEffect(() => {
     getAllTodo();
   }, [])
 
+  //runs everytime todos or status changes
   useEffect(() => {
-    console.log('todos updated');
-  }, [todos])
+    filterHandler();
+  }, [todos, status])
 
+  //functions
+  const filterHandler = () => {
+    switch (status) {
+      case 'pending':
+        setFilteredTodos(todos.filter(todo => !todo.completed))
+        break;
+      case 'completed':
+        setFilteredTodos(todos.filter(todo => todo.completed))
+        break;
+      default:
+        setFilteredTodos(todos)
+        break;
+    }
+  }
   const getAllTodo = () => {
     fetch(baseUrl)
-      .then(res => res.json())
-      .then((res) => {
-        setTodos(res.response.data)
-      });
+    .then(response => response.json())
+    .then((res) => {
+      setTodos(res.response.data)
+    });
   }
 
-  const addNewTodo = (name) => {
+  const addNewTodo = (curTodo) => {
+    addLocalTodo(curTodo);
     fetch(baseUrl, {
       method: 'POST',
       mode: 'cors',
-      body: JSON.stringify({ title: name })
-    }).then(res => res.json())
-      .then((res) => {
-        setTodos(res.response.data)
-      });
+      body: JSON.stringify(curTodo)
+    });
   }
 
   const updateTodo = (curTodo) => {
+    updateLocalTodo(curTodo);
     fetch(baseUrl, {
       method: 'PUT',
       mode: 'cors',
-      body: JSON.stringify({ id: curTodo.id, title: curTodo.title, completed: curTodo.completed })
-    }).then(res => res.json())
-      .then((res) => {
-        if(res.response.data) setTodos(res.response.data)
-      });
+      body: JSON.stringify(
+          {id: curTodo.id, title: curTodo.title, completed: curTodo.completed})
+    }).then();
+  }
+  const deleteTodo = (curTodo) => {
+    deleteLocalTodo(curTodo);
+    fetch(baseUrl + "/" + curTodo.id, {
+      method: 'DELETE',
+      mode: 'cors',
+      body: JSON.stringify(
+          {id: curTodo.id, title: curTodo.title, completed: curTodo.completed})
+    }).then(r => r.errored &&
+        console.log(r.response.message));
+  }
+  const addLocalTodo = (curTodo) => {
+    setTodos(todos.concat(curTodo));
+  }
+  const updateLocalTodo = (curTodo) => {
+    setTodos(todos.map(todo => {
+      if (todo.id === curTodo.id) {
+        return curTodo;
+      } else {
+        return todo;
+      }
+    }));
+  }
+  const deleteLocalTodo = (curTodo) => {
+    setTodos(todos.filter(todo => todo.id !== curTodo.id));
   }
 
-  const handleAddTodo = (e) => {
+  const handleAddTodo = () => {
     const name = todoNameRef.current.value
     if (name) {
       addNewTodo(name);
@@ -53,33 +101,37 @@ function App() {
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      handleAddTodo(event);
-    }
-  };
   const handleClearCompleted = () => {
     fetch(baseUrl, {
       method: 'DELETE',
       mode: 'cors'
-    }).then(res => res.json())
-      .then((res) => {
-        if(res.response.data) setTodos(res.response.data)
-      });
+    }).then(response => response.json())
+    .then((res) => {
+      if (res.response.data) {
+        setTodos(res.response.data)
+      }
+    });
   }
 
   return (
-    <>
-      <h1 align="center" className="appTitle">TodoList</h1>
-      <div className="todo-pending" align="right"> <span> <span>{todos.filter(todo => !todo.completed).length} </span> Todo items left </span> </div>
-      <div className="addTodoItem">
-        <input ref={todoNameRef} className="form-control addTodoItemInput" id="floatingInput" placeholder="Add Todo Item" onKeyDown={handleKeyDown}/>
-        <button onClick={handleAddTodo}>⏎</button>
+      <div className="App">
+        <header className="App-header">
+          <h1 className="App-title"> Todo List</h1>
+        </header>
+        <Form
+            inputText={inputText}
+            setInputText={setInputText}
+            addNewTodo={addNewTodo}
+            setStatus={setStatus}
+        />
+        <TodoList
+            todos={todos}
+            status={status}
+            filteredTodos={filteredTodos}
+            updateTodo={updateTodo}
+            deleteTodo={deleteTodo}
+        />
       </div>
-      <TodoList todos={todos} updateTodo={updateTodo} />
-      <button className="btn btn-danger" onClick={handleClearCompleted}> Clear Completed </button>
-    </>
   )
 }
 
