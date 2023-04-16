@@ -1,7 +1,6 @@
 :root{
     --todo-pending-bg: rgb(124, 134, 134) !important;
     --todo-pending-border-color: rgb(111, 134, 134);
-    --todo-extra: 123;
 }
 
 *{
