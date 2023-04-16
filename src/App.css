@@ -1,93 +1,163 @@
-:root{
-    --todo-pending-bg: rgb(124, 134, 134) !important;
-    --todo-pending-border-color: rgb(111, 134, 134);
+:root {
+    --all-field-background: #ffffff;
 }
 
-*{
-    padding: 1rem 1rem;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background-color: rgb(85, 84, 84);
-    color: rgb(255, 255, 255);
-    border-style: ridge;
-    border-width: 3px;
-    border-color: rgb(128, 124, 124);
-    padding: .1rem;
+body {
+    background-image: linear-gradient(180deg, #3f8135 0%, #000000 70%);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
 }
 
-@media (min-width: 768px) {
-    body{
-        margin: 2rem 2rem;
+header {
+    font-size: 2rem;
+}
+
+header,
+form {
+    min-height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form input,
+form button {
+    padding: 0.5rem;
+    font-size: 2rem;
+    border: none;
+    background: var(--all-field-background);
+}
+
+form button {
+    color: #ff6f47;
+    background: #f7fffe;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background: #ff6f47;
+    color: white;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-list {
+    min-width: 60%;
+    list-style: none;
+}
+
+@media (max-width: 768px) {
+    .todo-list {
+        min-width: 80%;
     }
 }
 
-.appTitle {
-    border-style: groove;
-    border-width: .15cm;
-    border-color: rgb(160, 175, 170);
-}
-
-.todo-pending {
-    background-color: var(--todo-pending-bg);
-    border-color: var(--todo-pending-border-color);
-    border-style: ridge;
-    border-width: .14cm;
-    border-color: rgb(153, 204, 204);
-}
-
-.todo-pending span{
-    background-color: var(--todo-pending-bg);
-}
-
-.todo-pending span span{
-    background-color:var(--todo-pending-bg);
-    font-weight: 900;
-    font-size: 40px;
-    margin: 0 -1rem !important;
-}
-
-.addTodoItem {
-    display:flex;
-    flex-direction:row;
-    /* This bit draws the box around it */
-    border:1px solid grey;
-}
-
-.addTodoItemInput#input {
-    /* Tell the input to use all the available space */
-    flex-grow:2;
-    /* And hide the input's outline, so the form looks like the outline */
-    border:none;
-    z-index: 1;
-}
-/* remove the input focus blue box, it will be in the wrong place. */
-.addTodoItemInput#input:focus {
-    outline: none;
-}
-/* Add the focus effect to the form so it contains the button */
-.addTodoItem:focus-within {
-    outline: 1px var(--todo-pending-border-color) !important;
-}
-
-.addTodoItem#button {
-    flex-grow: 2;
-    color:black;
-    background-color:var(--todo-pending-border-color) !important;
-    width: 4rem !important;
-    border-width: thin;
-}
-
-.addTodoItemInput{
-    justify-content: center;
+.todo {
+    margin: 0.5rem;
+    background: var(--all-field-background);
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    height: 8rem !important;
-    padding: 1rem 1rem !important;
-    font-size: 40px !important;
+    transition: all 1s ease;
 }
 
-::placeholder{
-    font-weight: 800 !important;
-    font-size: 40px;
-    color: rgb(150, 150, 150)!important;
+.filter-todo {
+    padding: 1rem;
 }
+
+.todo li {
+    flex: 1;
+}
+
+.trash-btn,
+.complete-btn {
+    background: #ff6f47;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.complete-btn {
+    background: rgb(11, 212, 162);
+}
+
+.todo-item {
+    padding: 0 0.5rem;
+}
+
+.fa-trash,
+.fa-check {
+    pointer-events: none;
+}
+
+.fall {
+    transform: translateY(10rem) rotateZ(20deg);
+    opacity: 0;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+/*CUSTOM SELECTOR */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none;
+    background: var(--all-field-background);
+}
+
+/* Custom Select */
+.select {
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+select {
+    color: #ff6f47;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    width: 12rem;
+}
+
+/* Arrow */
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    background: #ff6f47;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+/* Transition */
+/*
+.select:hover::after {
+  transform: scale(1.5);
+}
+*/
