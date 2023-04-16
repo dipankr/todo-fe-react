@@ -62,7 +62,7 @@ body{
 }
 /* Add the focus effect to the form so it contains the button */
 .addTodoItem:focus-within {
-    outline: .5px var(--todo-pending-border-color) !important;
+    outline: 1px var(--todo-pending-border-color) !important;
 }
 
 .addTodoItem#button {
