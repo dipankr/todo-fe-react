@@ -54,8 +54,14 @@ form button:hover {
 }
 
 .todo-list {
-    min-width: 80%;
+    min-width: 60%;
     list-style: none;
+}
+
+@media (max-width: 768px) {
+    .todo-list {
+        min-width: 80%;
+    }
 }
 
 .todo {
