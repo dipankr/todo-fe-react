@@ -55,6 +55,7 @@ function App() {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
+      event.preventDefault();
       handleAddTodo(event);
     }
   };

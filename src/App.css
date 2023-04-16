@@ -5,7 +5,6 @@
 
 *{
     padding: 1rem 1rem;
-    background-color: rgb(119, 119, 119);
 }
 
 body{
@@ -14,8 +13,8 @@ body{
     border-style: ridge;
     border-width: 3px;
     border-color: rgb(128, 124, 124);
-    margin: 1rem 1rem;
-    padding: .2rem;
+    margin: 2rem 2rem;
+    padding: .1rem;
 }
 
 .appTitle {
@@ -46,34 +45,32 @@ body{
 .addTodoItem {
     display:flex;
     flex-direction:row;
-
     /* This bit draws the box around it */
     border:1px solid grey;
-
-    /* I've used padding so you can see the edges of the elements. */
-    padding:1px;
 }
-input {
+
+.addTodoItemInput#input {
     /* Tell the input to use all the available space */
     flex-grow:2;
     /* And hide the input's outline, so the form looks like the outline */
     border:none;
+    z-index: 1;
 }
 /* remove the input focus blue box, it will be in the wrong place. */
-input:focus {
+.addTodoItemInput#input:focus {
     outline: none;
 }
-
 /* Add the focus effect to the form so it contains the button */
-form:focus-within {
-    outline: 1px solid blue
+.addTodoItem:focus-within {
+    outline: .5px var(--todo-pending-border-color) !important;
 }
 
-button {
-    /* Just a little styling to make it pretty */
-    border:1px var(--todo-pending-border-color);
-    background:var(--todo-pending-bg);
-    color:white;
+.addTodoItem#button {
+    flex-grow: 2;
+    color:black;
+    background-color:var(--todo-pending-border-color) !important;
+    width: 4rem !important;
+    border-width: thin;
 }
 
 .addTodoItemInput{
