@@ -1,6 +1,6 @@
 # Todo-FE-React
 
-[![Node CI](https://github.com/dipankr/todo-fe-react/actions/workflows/nodeCI.yml/badge.svg)](https://github.com/dipankr/todo-fe-react/actions/workflows/nodeCI.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/dipankr/todo-FE-react)
+[![Node CI](https://github.com/dipankr/todo-fe-react/actions/workflows/nodeci.yml/badge.svg?branch=main)](https://github.com/dipankr/todo-fe-react/actions/workflows/nodeci.yml) ![GitHub repo size](https://img.shields.io/github/repo-size/dipankr/todo-FE-react)
 
 My first attempt as Reactjs
 
