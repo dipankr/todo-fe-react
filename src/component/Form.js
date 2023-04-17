@@ -1,7 +1,13 @@
 import React from 'react'
 import {v4 as uuidv4} from 'uuid';
 
-function Form({inputText, setInputText, addNewTodo, setStatus}) {
+function Form({
+  inputText,
+  setInputText,
+  addNewTodo,
+  setStatus,
+  clearCompleted
+}) {
   const submitHandler = (e) => {
     e.preventDefault();
     const curTodo = {
@@ -19,6 +25,11 @@ function Form({inputText, setInputText, addNewTodo, setStatus}) {
     setStatus(e.target.value);
   }
 
+  const clearCompletedHandler = (e) => {
+    e.preventDefault();
+    clearCompleted();
+  }
+
   return (
       <form>
         <input type="text" placeholder="Add Task" onChange={inputChangeHandler}
@@ -33,6 +44,10 @@ function Form({inputText, setInputText, addNewTodo, setStatus}) {
             <option value="pending">Pending</option>
           </select>
         </div>
+        <button type="delete" className="clear-completed-button"
+                onClick={clearCompletedHandler} title="Clear All Completed!">
+          <i className="fa fa-times"/>
+        </button>
       </form>
   )
 }

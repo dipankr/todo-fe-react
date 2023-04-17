@@ -25,6 +25,8 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: space-around;
+    flex-wrap: wrap;
 }
 
 form input,
@@ -47,6 +49,16 @@ form button:hover {
     color: white;
 }
 
+.clear-completed-button {
+    color: red;
+    height: 3.5rem;
+}
+
+.clear-completed-button:hover {
+    background: red;
+    color: white;
+}
+
 .todo-container {
     display: flex;
     justify-content: center;
@@ -56,11 +68,18 @@ form button:hover {
 .todo-list {
     min-width: 60%;
     list-style: none;
+    display: flow;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
     .todo-list {
-        min-width: 80%;
+        width: 100%;
+    }
+
+    .todo {
+        width: 89%;
     }
 }
 

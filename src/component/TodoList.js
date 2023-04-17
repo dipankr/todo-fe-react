@@ -7,7 +7,7 @@ const TodoList = ({updateTodo, deleteTodo, filteredTodos}) => {
       filteredTodos.map((todo, index) => {
         return (
             <div className="todo-container">
-              <ul className="todo-list" key={index}>
+              <ul className="todo-list">
                 <Todo
                     key={index}
                     index={index}
