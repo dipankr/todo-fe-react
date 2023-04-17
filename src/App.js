@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TodoList from './component/TodoList';
 import Form from './component/Form';
 
@@ -11,11 +11,7 @@ function App() {
   const [status, setStatus] = useState('all');
   const [filteredTodos, setFilteredTodos] = useState([]);
 
-  //ref objects: for referencing
-  const todoNameRef = useRef()
-
   // useEffect: used to trigger effect on state change
-
   //run once
   useEffect(() => {
     getAllTodo();
@@ -92,23 +88,15 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== curTodo.id));
   }
 
-  const handleAddTodo = () => {
-    const name = todoNameRef.current.value
-    if (name) {
-      addNewTodo(name);
-      todoNameRef.current.value = null
-    }
-  };
+  const clearLocalComplete = () => {
+    setTodos(todos.filter(todo => !todo.completed));
+  }
 
-  const handleClearCompleted = () => {
+  const clearCompleted = () => {
+    clearLocalComplete();
     fetch(baseUrl, {
       method: 'DELETE',
       mode: 'cors'
-    }).then(response => response.json())
-    .then((res) => {
-      if (res.response.data) {
-        setTodos(res.response.data)
-      }
     });
   }
 
@@ -122,6 +110,7 @@ function App() {
             setInputText={setInputText}
             addNewTodo={addNewTodo}
             setStatus={setStatus}
+            clearCompleted={clearCompleted}
         />
         <TodoList
             todos={todos}

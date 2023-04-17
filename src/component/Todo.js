@@ -18,7 +18,8 @@ function Todo({index, todo, updateTodo, deleteTodo}) {
           {todo.title}
         </li>
         <button className="complete-btn" onClick={handleCompletedStatus}>
-          <i className="fas fa-check"></i>
+          <i className={`fas ${todo.completed ? "fa-times-circle"
+              : "fa-check"}`}></i>
         </button>
         <button className="trash-btn" onClick={handleTodoDelete}>
           <i className="fas fa-trash"></i>
