@@ -89,11 +89,30 @@ function App() {
   }
 
   const clearLocalComplete = () => {
-    setTodos(todos.filter(todo => !todo.completed));
+    let countCompleted = 0;
+    setTodos(todos.filter(todo => {
+      if (todo.completed) {
+        countCompleted++;
+      }
+      return !todo.completed;
+    }));
+
+    return countCompleted;
   }
 
   const clearCompleted = () => {
-    clearLocalComplete();
+
+    let isSure = window.confirm(
+        "Are you sure? \n\nAll the completed tasks will be DELETED!\nThis can not be undone.");
+    if (!isSure) {
+      return
+    }
+
+    let completedTodos = clearLocalComplete();
+    if (completedTodos === 0) {
+      return // skip call to the backend
+    }
+
     fetch(baseUrl, {
       method: 'DELETE',
       mode: 'cors'
