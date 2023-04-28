@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Todo({index, todo, updateTodo, deleteTodo}) {
+const Todo = ({index, todo, updateTodo, deleteTodo}) => {
 
   const handleTodoDelete = () => {
     deleteTodo(todo)

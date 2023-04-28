@@ -1,5 +1,7 @@
 :root {
     --all-field-background: #ffffff;
+    --orage-highlight: #ff6f47;
+    --background-image: linear-gradient(69deg, #2a2a2a, #263632 40%, #2a2a2a);
 }
 
 * {
@@ -9,7 +11,7 @@
 }
 
 body {
-    background-image: linear-gradient(180deg, #3f8135 0%, #000000 70%);
+    background-image: var(--background-image);
     color: white;
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
@@ -17,11 +19,12 @@ body {
 
 header {
     font-size: 2rem;
+    padding-top: 10rem;
+    padding-bottom: 0;
 }
 
 header,
 form {
-    min-height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,14 +41,14 @@ form button {
 }
 
 form button {
-    color: #ff6f47;
+    color: var(--orage-highlight);
     background: #f7fffe;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 form button:hover {
-    background: #ff6f47;
+    background: var(--orage-highlight);
     color: white;
 }
 
@@ -74,6 +77,10 @@ form button:hover {
 }
 
 @media (max-width: 768px) {
+    .add-todo-form {
+        margin: 1rem;
+    }
+
     .todo-list {
         width: 100%;
     }
@@ -104,7 +111,7 @@ form button:hover {
 
 .trash-btn,
 .complete-btn {
-    background: #ff6f47;
+    background: var(--orage-highlight);
     color: white;
     border: none;
     padding: 1rem;
@@ -156,7 +163,7 @@ select {
 }
 
 select {
-    color: #ff6f47;
+    color: var(--orage-highlight);
     font-family: "Poppins", sans-serif;
     cursor: pointer;
     width: 12rem;
@@ -169,7 +176,7 @@ select {
     top: 0;
     right: 0;
     padding: 1rem;
-    background: #ff6f47;
+    background: var(--orage-highlight);
     cursor: pointer;
     pointer-events: none;
 }
@@ -180,3 +187,71 @@ select {
   transform: scale(1.5);
 }
 */
+
+/* login/register style */
+.login-register-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 3rem;
+}
+
+.login-register-form {
+    display: flex;
+    padding: 2rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-register-form input {
+    margin: 1rem 3rem;
+    padding: 1rem 1rem;
+    border: none;
+    border-radius: 1rem;
+}
+
+.login-register-form button {
+    border: none;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.login-register-form ::placeholder {
+    padding: 0.5rem;
+}
+
+.link-btn {
+    background: none;
+    color: white;
+    text-decoration: underline;
+    border: none;
+}
+
+@media screen and (min-width: 600px) {
+    .login-register-form {
+        padding: 5rem 1.5rem;
+        border: 1px solid white;
+        border-radius: 1rem;
+        margin: 2rem;
+    }
+
+    .todos-form {
+        padding: 1rem 1.5rem;
+        border: 1px solid white;
+        border-radius: 1rem;
+        margin: 2rem;
+    }
+}
+
+.not-found-div {
+    padding: 5rem 1.5rem;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 1rem;
+    margin: 2rem;
+}
