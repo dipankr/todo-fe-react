@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import TodoList from './component/TodoList';
-import Form from './component/Form';
+import {Route, Routes} from 'react-router-dom';
+import Login from "./component/Login";
+import Register from "./component/Register";
+import Form from "./component/Form";
+import NoMatch from "./component/NoMatch";
+import Header from "./component/Header";
+
+const LazyTodos = React.lazy(() => import('./component/TodoList'));
 
 const baseUrl = 'https://todo-uyt1.onrender.com/api/todolist';
 
@@ -20,6 +26,7 @@ function App() {
   //runs everytime todos or status changes
   useEffect(() => {
     filterHandler();
+    // eslint-disable-next-line
   }, [todos, status])
 
   //functions
@@ -38,12 +45,11 @@ function App() {
   }
   const getAllTodo = () => {
     fetch(baseUrl)
-    .then(response => response.json())
+    .then(r => r.json())
     .then((res) => {
-      setTodos(res.response.data)
+      setTodos(res.data)
     });
   }
-
   const addNewTodo = (curTodo) => {
     addLocalTodo(curTodo);
     fetch(baseUrl, {
@@ -52,7 +58,6 @@ function App() {
       body: JSON.stringify(curTodo)
     });
   }
-
   const updateTodo = (curTodo) => {
     updateLocalTodo(curTodo);
     fetch(baseUrl, {
@@ -70,36 +75,8 @@ function App() {
       body: JSON.stringify(
           {id: curTodo.id, title: curTodo.title, completed: curTodo.completed})
     }).then(r => r.errored &&
-        console.log(r.response.message));
+        console.log(r.message));
   }
-  const addLocalTodo = (curTodo) => {
-    setTodos(todos.concat(curTodo));
-  }
-  const updateLocalTodo = (curTodo) => {
-    setTodos(todos.map(todo => {
-      if (todo.id === curTodo.id) {
-        return curTodo;
-      } else {
-        return todo;
-      }
-    }));
-  }
-  const deleteLocalTodo = (curTodo) => {
-    setTodos(todos.filter(todo => todo.id !== curTodo.id));
-  }
-
-  const clearLocalComplete = () => {
-    let countCompleted = 0;
-    setTodos(todos.filter(todo => {
-      if (todo.completed) {
-        countCompleted++;
-      }
-      return !todo.completed;
-    }));
-
-    return countCompleted;
-  }
-
   const clearCompleted = () => {
 
     let isSure = window.confirm(
@@ -119,25 +96,61 @@ function App() {
     });
   }
 
+  //handle local data
+  const addLocalTodo = (curTodo) => {
+    setTodos(todos.concat(curTodo));
+  }
+  const updateLocalTodo = (curTodo) => {
+    setTodos(todos.map(todo => {
+      if (todo.id === curTodo.id) {
+        return curTodo;
+      } else {
+        return todo;
+      }
+    }));
+  }
+  const deleteLocalTodo = (curTodo) => {
+    setTodos(todos.filter(todo => todo.id !== curTodo.id));
+  }
+  const clearLocalComplete = () => {
+    let countCompleted = 0;
+    setTodos(todos.filter(todo => {
+      if (todo.completed) {
+        countCompleted++;
+      }
+      return !todo.completed;
+    }));
+
+    return countCompleted;
+  }
+
   return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title"> Todo List</h1>
-        </header>
-        <Form
-            inputText={inputText}
-            setInputText={setInputText}
-            addNewTodo={addNewTodo}
-            setStatus={setStatus}
-            clearCompleted={clearCompleted}
-        />
-        <TodoList
-            todos={todos}
-            status={status}
-            filteredTodos={filteredTodos}
-            updateTodo={updateTodo}
-            deleteTodo={deleteTodo}
-        />
+        <Header/>
+        <Routes>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register"
+                 element={<Register/>}/>
+          <Route path="/" element={
+            <div className="todos-form">
+              <Form
+                  inputText={inputText}
+                  setInputText={setInputText}
+                  addNewTodo={addNewTodo}
+                  setStatus={setStatus}
+                  clearCompleted={clearCompleted}
+              />
+              <React.Suspense fallback='Loading...'>
+                <LazyTodos
+                    filteredTodos={filteredTodos}
+                    updateTodo={updateTodo}
+                    deleteTodo={deleteTodo}
+                />
+              </React.Suspense>
+            </div>
+          }/>
+          <Route path='*' element={<NoMatch/>}/>
+        </Routes>
       </div>
   )
 }
