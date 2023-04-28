@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter} from 'react-router-dom';
+import {createHashRouter, RouterProvider} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const router = createHashRouter([
+  {
+    path: "/*",
+    element: <App/>,
+  }
+]);
 root.render(
     <React.StrictMode>
-      <BrowserRouter basename="/todo-fe-react">
-        <App/>
-      </BrowserRouter>
+      <RouterProvider router={router}/>
     </React.StrictMode>
 );
 
