@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/todo-fe-react/static/css/main.1d94d79d.css",
-    "main.js": "/todo-fe-react/static/js/main.adef212f.js",
-    "static/js/688.aaf0f320.chunk.js": "/todo-fe-react/static/js/688.aaf0f320.chunk.js",
+    "main.js": "/todo-fe-react/static/js/main.4df2bb01.js",
+    "static/js/688.95a4243a.chunk.js": "/todo-fe-react/static/js/688.95a4243a.chunk.js",
     "static/js/787.31689b47.chunk.js": "/todo-fe-react/static/js/787.31689b47.chunk.js",
     "index.html": "/todo-fe-react/index.html",
     "main.1d94d79d.css.map": "/todo-fe-react/static/css/main.1d94d79d.css.map",
-    "main.adef212f.js.map": "/todo-fe-react/static/js/main.adef212f.js.map",
-    "688.aaf0f320.chunk.js.map": "/todo-fe-react/static/js/688.aaf0f320.chunk.js.map",
+    "main.4df2bb01.js.map": "/todo-fe-react/static/js/main.4df2bb01.js.map",
+    "688.95a4243a.chunk.js.map": "/todo-fe-react/static/js/688.95a4243a.chunk.js.map",
     "787.31689b47.chunk.js.map": "/todo-fe-react/static/js/787.31689b47.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1d94d79d.css",
-    "static/js/main.adef212f.js"
+    "static/js/main.4df2bb01.js"
   ]
 }
