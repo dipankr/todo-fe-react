@@ -1,32 +1,37 @@
-import React from 'react'
-import {v4 as uuidv4} from 'uuid';
+import React, {useContext, useState} from 'react'
+import {UserTodoContext} from "../context/UserTodoContext";
+import {FilterContext} from "../context/FilterContext";
+import {LoadingContext} from "../context/LoadingContext";
 
-const Form = ({
-  inputText,
-  setInputText,
-  addNewTodo,
-  setStatus,
-  clearCompleted
-}) => {
+const AddTodoForm = () => {
+  const [inputText, setInputText] = useState('');
+
+  const {addUserTodo, clearCompletedUserTodo} = useContext(UserTodoContext);
+  const {setFilter} = useContext(FilterContext);
+  const {isLoading} = useContext(LoadingContext);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    const curTodo = {
-      id: uuidv4(),
+    const curUserTodo = {
       title: inputText,
       completed: false
     }
-    addNewTodo(curTodo);
+    addUserTodo(curUserTodo);
     setInputText('');
   }
   const inputChangeHandler = (e) => {
     setInputText(e.target.value);
   }
   const statusHandler = (e) => {
-    setStatus(e.target.value);
+    setFilter(e.target.value);
   }
   const clearCompletedHandler = (e) => {
     e.preventDefault();
-    clearCompleted();
+    clearCompletedUserTodo();
+  }
+
+  if (isLoading) {
+    return
   }
 
   return (
@@ -51,4 +56,4 @@ const Form = ({
   )
 }
 
-export default Form;
+export default AddTodoForm;

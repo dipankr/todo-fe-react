@@ -1,24 +1,25 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {UserTodoContext} from "../context/UserTodoContext";
 
-const Todo = ({index, todo, updateTodo, deleteTodo}) => {
-
-  const handleTodoDelete = () => {
-    deleteTodo(todo)
-  }
+const Todo = ({index, userTodo}) => {
+  const {updateUserTodo, deleteUserTodo} = useContext(UserTodoContext);
 
   const handleCompletedStatus = () => {
-    todo.completed = !todo.completed;
-    updateTodo(todo);
+    userTodo.completed = !userTodo.completed;
+    updateUserTodo(userTodo);
+  }
+  const handleTodoDelete = () => {
+    deleteUserTodo(userTodo)
   }
 
   return (
       <div className="todo">
-        <li className={`todo-item ${todo.completed && "completed"}`}
-            key={index}>
-          {todo.title}
+        <li className={`todo-item ${userTodo.completed && "completed"}`}
+            key={userTodo.id}>
+          {userTodo.title}
         </li>
         <button className="complete-btn" onClick={handleCompletedStatus}>
-          <i className={`fas ${todo.completed ? "fa-times-circle"
+          <i className={`fas ${userTodo.completed ? "fa-times-circle"
               : "fa-check"}`}></i>
         </button>
         <button className="trash-btn" onClick={handleTodoDelete}>
